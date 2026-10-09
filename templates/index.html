@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e0f2fe, #f0fdf4);
+            color: #1e293b;
+            min-height: 100vh;
+            padding: 30px 16px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.10);
+        }
+
+        h1 {
+            text-align: center;
+            color: #0f766e;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 28px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: 2px solid #5eead4;
+            border-color: #0f766e;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 26px;
+            padding: 14px;
+            border: none;
+            border-radius: 9px;
+            background: #0f766e;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #115e59;
+        }
+
+        .result {
+            margin-top: 24px;
+            padding: 18px;
+            background: #f0fdfa;
+            border: 1px solid #99f6e4;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .notice {
+            margin-top: 24px;
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 22px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <h1>Diabetes Prediction</h1>
+
+        <p class="subtitle">
+            Machine Learning Demonstration
+        </p>
+
+        <form action="/predict" method="post">
+            <div class="form-grid">
+                <div>
+                    <label for="Pregnancies">Pregnancies</label>
+                    <input id="Pregnancies" type="number"
+                           name="Pregnancies" min="0" max="20"
+                           value="1" required>
+                </div>
+
+                <div>
+                    <label for="Glucose">Glucose</label>
+                    <input id="Glucose" type="number"
+                           name="Glucose" min="0" max="300"
+                           step="any" value="120" required>
+                </div>
+
+                <div>
+                    <label for="BloodPressure">Blood Pressure</label>
+                    <input id="BloodPressure" type="number"
+                           name="BloodPressure" min="0" max="200"
+                           step="any" value="70" required>
+                </div>
+
+                <div>
+                    <label for="SkinThickness">Skin Thickness</label>
+                    <input id="SkinThickness" type="number"
+                           name="SkinThickness" min="0" max="100"
+                           step="any" value="20" required>
+                </div>
+
+                <div>
+                    <label for="Insulin">Insulin</label>
+                    <input id="Insulin" type="number"
+                           name="Insulin" min="0" max="1000"
+                           step="any" value="80" required>
+                </div>
+
+                <div>
+                    <label for="BMI">BMI</label>
+                    <input id="BMI" type="number"
+                           name="BMI" min="0" max="100"
+                           step="any" value="28" required>
+                </div>
+
+                <div>
+                    <label for="DiabetesPedigreeFunction">
+                        Diabetes Pedigree Function
+                    </label>
+                    <input id="DiabetesPedigreeFunction"
+                           type="number"
+                           name="DiabetesPedigreeFunction"
+                           min="0" max="3" step="any"
+                           value="0.5" required>
+                </div>
+
+                <div>
+                    <label for="Age">Age</label>
+                    <input id="Age" type="number"
+                           name="Age" min="1" max="120"
+                           value="30" required>
+                </div>
+            </div>
+
+            <button type="submit">Run Model Prediction</button>
+        </form>
+
+        {% if prediction is not none %}
+        <div class="result">
+            <h2>Model Output</h2>
+            <p>{{ prediction }}</p>
+        </div>
+        {% endif %}
+
+        <p class="notice">
+            Educational demonstration only. This model is not a
+            medical diagnostic tool. Its output should not be used
+            to make healthcare decisions.
+        </p>
+    </main>
+</body>
+</html>
